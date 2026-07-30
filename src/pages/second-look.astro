@@ -33,7 +33,7 @@ const title = `${secondLook.headline} — The Plain Office`;
     <div class="wrap" style="text-align:center;">
       <h2 class="no-rule">{secondLook.gettingRecords.heading}</h2>
       <p class="small-note" style="margin-bottom:28px;">{secondLook.gettingRecords.subtext}</p>
-      <div class="card-grid" style="grid-template-columns:repeat(3, 1fr); text-align:left;">
+      <div class="card-grid" style="text-align:left;">
         {secondLook.gettingRecords.options.map((opt) => (
           <div class="icon-card">
             <Icon name={opt.icon as any} />

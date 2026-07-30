@@ -188,7 +188,10 @@ h3 { font-size: 19px; margin: 0 0 8px; font-weight: 700; }
    rather than let it overflow or squeeze unreadably. */
 @media (max-width: 1120px) {
   .head-inner { flex-wrap: wrap; }
-  .site-nav { width: 100%; flex-wrap: wrap; order: 3; }
+  .site-nav { width: 100%; flex-wrap: wrap; order: 3; gap: 0 20px; }
+  /* Larger tap targets once nav wraps to its own row — this is where
+     most visitors on a phone actually touch these links. */
+  .site-nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 8px 2px; }
 }
 
 /* ---- footer (dark, matches approved Figma) ---- */
@@ -258,7 +261,10 @@ h3 { font-size: 19px; margin: 0 0 8px; font-weight: 700; }
 
 /* ---- Home page (matches approved Figma) ---- */
 .two-col { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: start; }
-@media (max-width: 780px) { .two-col { grid-template-columns: 1fr; } }
+.two-col.wide-right { grid-template-columns: 1fr 1.3fr; }
+@media (max-width: 780px) {
+  .two-col, .two-col.wide-right { grid-template-columns: 1fr; }
+}
 
 .numbered-row { display: flex; justify-content: space-between; gap: 24px; text-align: center; flex-wrap: wrap; }
 .numbered-row-item { flex: 1 1 160px; }
@@ -364,7 +370,7 @@ h3 { font-size: 19px; margin: 0 0 8px; font-weight: 700; }
 /* ---- Table of contents (Booklet) ---- */
 .toc-list { list-style: none; padding: 0; margin: 0; }
 .toc-list li { display: flex; align-items: baseline; gap: 8px; padding: 14px 0; border-bottom: 1px solid var(--color-rule); }
-.toc-list .toc-title { white-space: nowrap; }
+.toc-list .toc-title { flex-shrink: 1; min-width: 0; }
 .toc-list .toc-fill { flex: 1; border-bottom: 1px dotted var(--color-rule-2); margin-bottom: 4px; }
 .toc-list .toc-page { color: var(--color-bronze); font-weight: 700; font-variant-numeric: tabular-nums; }
 

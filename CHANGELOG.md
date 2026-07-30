@@ -4,6 +4,42 @@ All notable changes to the-plain-office-v1 are recorded here, in the order
 they happened, so a future reader (human or AI) can see not just *what*
 changed but *why*. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased] — 2026-07-30 — Full responsive audit
+
+Audited every page at 360px (the Build Brief's own minimum) and 768px
+by screenshotting each one and measuring actual rendered width against
+viewport width — not just eyeballing it. Found and fixed three real
+horizontal-overflow bugs, not just cosmetic tightness:
+
+- **Booklet's table of contents** forced `white-space: nowrap` on
+  chapter titles. Fine on desktop; on a 360px screen a title like
+  "Structuring Debt as a Defensive Asset" doesn't fit on one line, so
+  the row (and the whole page) was pushed wider than the viewport
+  instead of wrapping. Removed the nowrap; long titles now wrap onto a
+  second line.
+- **Second Look's "How We Get Your Records" cards** were hardcoded to
+  `repeat(3, 1fr)` with no fallback for narrow screens — three fixed
+  columns don't fit in 360px. Removed the override; falls back to the
+  shared `.card-grid` responsive default (`auto-fit, minmax(...)`),
+  which was already safe.
+- **Contact's two-column layout** used an inline `style=` attribute to
+  widen the form column. Inline styles beat the media query that's
+  supposed to collapse `.two-col` to one column below 780px — this
+  page never actually collapsed no matter how narrow the screen. Moved
+  the override into a `.wide-right` class instead, which the same
+  media query now correctly overrides on mobile.
+
+Confirmed the fix by measuring every page's screenshot width at both
+360px and 768px — all seven came back exactly matching the requested
+viewport width (no overflow) both before and after, except these
+three, which are now fixed and reconfirmed.
+
+Also increased mobile nav link tap targets to 44px minimum (they were
+~25px) once the nav wraps to its own row below 1120px — this is the
+actual on-phone tap target, not a decorative breakpoint.
+
+---
+
 ## [Unreleased] — 2026-07-30 — Figma redesign wave (Home, Sample Reports, About, Booklet, Second Look, Contact)
 
 ### Context
