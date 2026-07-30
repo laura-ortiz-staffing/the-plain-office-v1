@@ -9,17 +9,24 @@ const showPdf = delivery === 'pdf' || delivery === 'mail_and_pdf';
 ---
 
 <BaseLayout title={`${booklet.thankYou.heading} — The Plain Office`} description={booklet.thankYou.mailedParagraph} path="/booklet/thank-you">
-  <section class="section">
-    <div class="wrap prose">
-      <h1>{booklet.thankYou.heading}</h1>
-      {showMailed && <p>{booklet.thankYou.mailedParagraph}</p>}
-      {showPdf && (
-        <p>
-          {booklet.thankYou.pdfParagraphPrefix}{' '}
-          <a href={site.bookletPdfPath}>{booklet.thankYou.pdfLinkLabel}</a>.
+  <section class="section" style="background:var(--color-cream-2); text-align:center;">
+    <div class="wrap">
+      <div class="form-card thank-you-center" style="max-width:640px; margin:0 auto; text-align:center;">
+        <h2 class="no-rule">{booklet.thankYou.heading}</h2>
+        {showMailed && <p style="color:var(--color-ink-secondary);">
+          {booklet.thankYou.mailedParagraph}{' '}
+          {showPdf && <>{booklet.thankYou.pdfParagraphPrefix}{' '}<a href={site.bookletPdfPath}>{booklet.thankYou.pdfLinkLabel}</a>.</>}
+        </p>}
+        {!showMailed && showPdf && <p style="color:var(--color-ink-secondary);">
+          {booklet.thankYou.pdfParagraphPrefix}{' '}<a href={site.bookletPdfPath}>{booklet.thankYou.pdfLinkLabel}</a>.
+        </p>}
+        <hr class="divider-line" style="max-width:60px; margin:20px auto;" />
+        <p class="small-note" style="font-style:italic;">
+          {booklet.thankYou.whileYouWaitPrefix}{' '}
+          <a href="/samples" style="font-style:italic;">{booklet.thankYou.whileYouWaitLinkLabel}</a>{' '}
+          {booklet.thankYou.whileYouWaitSuffix}
         </p>
-      )}
-      <p>{booklet.thankYou.whileYouWait} <a href="/samples">See the whole sample report</a>.</p>
+      </div>
     </div>
   </section>
 </BaseLayout>

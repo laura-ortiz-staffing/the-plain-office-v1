@@ -1,51 +1,49 @@
-// Verbatim from "Website Copy Deck" v2, section "The Booklet (/booklet)".
+// The Booklet page — matches the approved Figma screen (2026-07-30).
+// Full rewrite: different framing ("A Manual for Better Decisions"),
+// different table of contents, different excerpt, and a different
+// form (Organization instead of Business/Trade, a required Email —
+// flagged, see CHANGELOG — and a structured mailing address). The
+// thank-you copy is close to the original Copy Deck wording and was
+// kept.
 
 export const booklet = {
-  kicker: 'The Booklet · Free',
-  headline: 'Counting the Cost',
+  kicker: 'The Plain Office Foundation',
+  headline: 'A Manual for Better Decisions.',
   intro:
-    'A plain guide to knowing your numbers, finding the bottleneck, and keeping more of what you earn. It is written for the owner whose operation has outgrown its paperwork — the shop with a crew, the builder with two trailers, the store, the farm that hires. It is free, it is short, and it is complete in itself: every idea in it can be put to work whether or not we ever hear from you.',
+    'Our annual printed booklet is a compilation of our most critical frameworks for understanding institutional health. It is not a marketing brochure; it is a reference manual meant to be kept on your desk and referenced when navigating complex organizational choices.',
 
-  coverCard: {
-    brandLine: 'The Plain Office',
-    title: 'COUNTING THE COST',
-    subtitle: 'A Plain Guide to Knowing Your Numbers, Finding the Bottleneck, and Keeping More of What You Earn',
-    kicker: 'BOOKKEEPING & BUSINESS SUPPORT',
+  coverMock: {
+    edition: '2024 Edition',
+    title: 'The Plain Office Booklet',
+    volume: 'Volume IV',
   },
 
   contents: {
-    heading: 'What is in it',
+    heading: 'Table of Contents',
     chapters: [
-      'The Evening Ledger',
-      'What Good Books Are For',
-      'Ten Signs Your Bookkeeping Is Falling Short',
-      'The Report You Ought to Get Every Month',
-      'The Slowest Station Sets the Pace',
-      'Money Hiding in Plain Sight',
-      'The Office Question',
-      'How It Works, Plainly',
-      'Questions Folks Ask Us',
-      'The Next Step Costs a Postage Stamp',
-    ] satisfies string[],
+      { title: 'The Illusion of Certainty in Ledgers', page: '04' },
+      { title: 'Structuring Debt as a Defensive Asset', page: '12' },
+      { title: 'The Institutional Memory of Operations', page: '28' },
+      { title: 'Frameworks for Capital Preservation', page: '41' },
+    ],
   },
 
   excerpt: {
     quote:
-      '“Here is the trouble: the cost of an outgrown office is not the bookkeeper’s fee you saved. It is the $16,200 sitting in unpaid invoices nobody chased. It is the premium creeping up three years running because nobody asked why. It is the price you did not raise because you could not tell whether the big jobs were making money or just making noise. It is decisions made blind.”',
-    caption: '— from chapter 1, The Evening Ledger',
+      'The most profound mistakes in organizational planning do not stem from a lack of data, but from a fundamental misreading of the emotional weight carried by historical ledgers.',
+    caption: 'Excerpt from Chapter 1',
   },
 
   form: {
-    heading: 'Request the booklet',
+    heading: 'Request a Copy',
+    subtext: 'Please complete the form below to receive the current volume.',
+    formatLabel: 'Preferred Format (Select One)',
     deliveryChoices: [
-      { value: 'mail_and_pdf', label: 'Mail me the printed booklet and let me read the PDF now' },
-      { value: 'mail', label: 'Mail me the printed booklet' },
-      { value: 'pdf', label: 'Just the PDF, right away' },
+      { value: 'mail_and_pdf', label: 'Both Printed & PDF' },
+      { value: 'mail', label: 'Printed Copy Only' },
+      { value: 'pdf', label: 'Digital PDF Only' },
     ],
-    tradePlaceholder: 'Sheds, harness, retail, dairy…',
-    submitLabel: 'Send my booklet',
-    note: 'We will send you the booklet and nothing else, unless you ask. Your booklet goes into the mail within two business days.',
-    replyCardNote: 'A reply card is bound into the back of the printed booklet — postage paid. The mail works as well as this form ever will.',
+    submitLabel: 'Submit Request',
   },
 
   thankYou: {
@@ -53,6 +51,8 @@ export const booklet = {
     mailedParagraph: 'Your booklet will go into the mail within two business days.',
     pdfParagraphPrefix: 'If you asked for the PDF, it is here:',
     pdfLinkLabel: 'Counting the Cost (PDF)',
-    whileYouWait: 'While you wait — see the sample report the booklet talks about.',
+    whileYouWaitPrefix: 'While you wait —',
+    whileYouWaitLinkLabel: 'see the sample report',
+    whileYouWaitSuffix: 'the booklet talks about.',
   },
 } as const;

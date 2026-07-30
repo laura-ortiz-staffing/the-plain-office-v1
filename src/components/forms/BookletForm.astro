@@ -4,14 +4,13 @@ import { booklet } from '../../data/copy/booklet';
 const errorField = Astro.url.searchParams.get('error');
 const errorMessages: Record<string, string> = {
   name: 'We need your name to send the booklet.',
-  mailing_address: 'We need your mailing address to send the booklet.',
+  street_address: 'We need your mailing address to send the booklet.',
   rate_limited: 'That is a lot of requests in a short time — please try again in a minute.',
 };
 const errorMessage = errorField ? errorMessages[errorField] : null;
 ---
 
-<form class="tpo-form" method="post" action="/api/booklet" novalidate>
-  <h3>{booklet.form.heading}</h3>
+<form class="tpo-form form-card" method="post" action="/api/booklet" novalidate>
   {errorMessage && <p class="field-error" role="alert">{errorMessage}</p>}
 
   <div class="honeypot-field" aria-hidden="true">
@@ -20,8 +19,8 @@ const errorMessage = errorField ? errorMessages[errorField] : null;
   </div>
 
   <div class="field">
-    <label id="delivery-label">How would you like it?</label>
-    <div class="choice-group" role="radiogroup" aria-labelledby="delivery-label">
+    <label id="delivery-label">{booklet.form.formatLabel}</label>
+    <div class="inline-radio-group" role="radiogroup" aria-labelledby="delivery-label">
       {booklet.form.deliveryChoices.map((choice, i) => (
         <div class="choice-option">
           <input type="radio" id={`delivery-${choice.value}`} name="delivery" value={choice.value} checked={i === 0} />
@@ -31,42 +30,39 @@ const errorMessage = errorField ? errorMessages[errorField] : null;
     </div>
   </div>
 
-  <div class="field">
-    <label for="booklet-name">Name</label>
-    <input id="booklet-name" type="text" name="name" required class={errorField === 'name' ? 'field-missing' : ''} />
+  <div class="field-row">
+    <div class="field">
+      <label for="booklet-name">Full Name</label>
+      <input id="booklet-name" type="text" name="name" class={errorField === 'name' ? 'field-missing' : ''} />
+    </div>
+    <div class="field">
+      <label for="booklet-org">Organization <span class="hint">Optional</span></label>
+      <input id="booklet-org" type="text" name="organization" />
+    </div>
   </div>
 
   <div class="field">
-    <label for="booklet-business">Business name <span class="hint">Optional</span></label>
-    <input id="booklet-business" type="text" name="business_name" />
-  </div>
-
-  <div class="field">
-    <label for="booklet-trade">Trade or type of work <span class="hint">Optional</span></label>
-    <input id="booklet-trade" type="text" name="trade" placeholder={booklet.form.tradePlaceholder} />
-  </div>
-
-  <div class="field">
-    <label for="booklet-address">Mailing address <span class="hint">Needed if mailed</span></label>
-    <input id="booklet-address" type="text" name="mailing_address" class={errorField === 'mailing_address' ? 'field-missing' : ''} />
-  </div>
-
-  <div class="field">
-    <label for="booklet-town">Town, state, ZIP</label>
-    <input id="booklet-town" type="text" name="town_state_zip" />
-  </div>
-
-  <div class="field">
-    <label for="booklet-phone">Telephone <span class="hint">Optional</span></label>
-    <input id="booklet-phone" type="tel" name="telephone" />
-  </div>
-
-  <div class="field">
-    <label for="booklet-email">Email <span class="hint">Optional</span></label>
+    <!--
+      Shown as required per the approved design, but NOT actually
+      enforced (no `required` attribute) — the Build Brief is explicit
+      that no action on the site may require an email address, and
+      many of this audience have none. Flagged to the client; see
+      CHANGELOG.md.
+    -->
+    <label for="booklet-email">Email Address *</label>
     <input id="booklet-email" type="email" name="email" />
   </div>
 
-  <button class="btn btn-primary" type="submit">{booklet.form.submitLabel}</button>
-  <p class="small-note" style="margin-top:16px;">{booklet.form.note}</p>
+  <div class="field">
+    <label>Mailing Address *</label>
+    <input type="text" name="street_address" placeholder="Street Address" style="margin-bottom:12px;" class={errorField === 'street_address' ? 'field-missing' : ''} aria-label="Street Address" />
+    <div class="field-row">
+      <input type="text" name="city" placeholder="City" aria-label="City" />
+      <input type="text" name="postal_code" placeholder="Postal Code" aria-label="Postal Code" />
+    </div>
+  </div>
+
+  <div class="form-actions-right">
+    <button class="btn btn-primary" type="submit">{booklet.form.submitLabel}</button>
+  </div>
 </form>
-<p class="small-note" style="margin-top:20px; font-style:italic;">{booklet.form.replyCardNote}</p>

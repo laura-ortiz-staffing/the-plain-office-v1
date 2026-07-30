@@ -43,6 +43,6 @@ const canonicalURL = new URL(path, Astro.site);
     <main id="main">
       <slot />
     </main>
-    <SiteFooter />
+    <SiteFooter currentPath={path} />
   </body>
 </html>

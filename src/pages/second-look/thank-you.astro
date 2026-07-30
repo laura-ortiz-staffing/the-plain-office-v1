@@ -4,10 +4,15 @@ import { secondLook } from '../../data/copy/second-look';
 ---
 
 <BaseLayout title={`${secondLook.thankYou.heading} — The Plain Office`} description={secondLook.thankYou.body} path="/second-look/thank-you">
-  <section class="section">
-    <div class="wrap prose">
-      <h1>{secondLook.thankYou.heading}</h1>
-      <p>{secondLook.thankYou.body}</p>
+  <section class="section" style="background:var(--color-cream-2); text-align:center;">
+    <div class="wrap">
+      <div class="form-card" style="max-width:640px; margin:0 auto; text-align:center;">
+        <h2 class="no-rule">{secondLook.thankYou.heading}</h2>
+        <p style="color:var(--color-ink-secondary);">{secondLook.thankYou.body}</p>
+        <a href={secondLook.thankYou.returnLinkHref} style="color:var(--color-bronze); font-weight:700; letter-spacing:.06em; text-transform:uppercase; font-size:13px; text-decoration:underline;">
+          {secondLook.thankYou.returnLinkLabel}
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

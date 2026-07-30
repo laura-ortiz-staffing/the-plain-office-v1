@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PullQuote from '../components/PullQuote.astro';
 import BookletForm from '../components/forms/BookletForm.astro';
 import { booklet } from '../data/copy/booklet';
 
@@ -8,35 +7,51 @@ const title = `${booklet.headline} — The Plain Office`;
 ---
 
 <BaseLayout title={title} description={booklet.intro} path="/booklet">
-  <section class="section">
-    <div class="wrap" style="display:grid; grid-template-columns: 1fr 1.4fr; gap:40px; align-items:start;">
-      <div class="card" style="text-align:center;">
-        <p class="small-note" style="text-transform:uppercase; letter-spacing:.1em;">{booklet.coverCard.brandLine}</p>
-        <h3 style="margin:12px 0;">{booklet.coverCard.title}</h3>
-        <p class="small-note">{booklet.coverCard.subtitle}</p>
-        <p class="kicker" style="margin-top:16px;">{booklet.coverCard.kicker}</p>
-      </div>
+  <section class="section" style="background:var(--color-cream-2);">
+    <div class="wrap two-col">
       <div>
         <p class="kicker">{booklet.kicker}</p>
         <h1>{booklet.headline}</h1>
-        <p class="lede">{booklet.intro}</p>
+        <p style="color:var(--color-ink-secondary);">{booklet.intro}</p>
+        <div style="width:48px; border-top:3px solid var(--color-bronze); margin-top:20px;"></div>
+      </div>
+      <div class="booklet-cover-mock">
+        <p class="edition">{booklet.coverMock.edition}</p>
+        <h2>{booklet.coverMock.title}</h2>
+        <div class="rule"></div>
+        <p class="volume">{booklet.coverMock.volume}</p>
       </div>
     </div>
   </section>
 
-  <section class="section" style="background:var(--color-cream);">
-    <div class="wrap prose">
-      <h2>{booklet.contents.heading}</h2>
-      <ol style="color:var(--color-ink-secondary);">
-        {booklet.contents.chapters.map((ch) => <li style="margin-bottom:6px;">{ch}</li>)}
-      </ol>
-      <PullQuote caption={booklet.excerpt.caption}>{booklet.excerpt.quote}</PullQuote>
+  <section class="section" style="background:var(--color-cream-2);">
+    <div class="wrap two-col">
+      <div>
+        <h2 class="no-rule">{booklet.contents.heading}</h2>
+        <ul class="toc-list">
+          {booklet.contents.chapters.map((ch, i) => (
+            <li>
+              <span class="toc-title">{i + 1}. {ch.title}</span>
+              <span class="toc-fill"></span>
+              <span class="toc-page">{ch.page}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="notice" style="max-width:none;">
+        <p style="margin:0 0 10px;">{booklet.excerpt.quote}</p>
+        <p style="margin:0; font-weight:700; font-style:normal; text-transform:uppercase; font-size:12px; letter-spacing:.06em;">— {booklet.excerpt.caption}</p>
+      </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" style="background:var(--color-cream-2); text-align:center;">
     <div class="wrap">
-      <BookletForm />
+      <h2 class="no-rule">{booklet.form.heading}</h2>
+      <p class="small-note" style="margin-bottom:32px;">{booklet.form.subtext}</p>
+      <div style="text-align:left; max-width:640px; margin:0 auto;">
+        <BookletForm />
+      </div>
     </div>
   </section>
 </BaseLayout>

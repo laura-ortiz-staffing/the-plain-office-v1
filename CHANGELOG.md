@@ -4,6 +4,146 @@ All notable changes to the-plain-office-v1 are recorded here, in the order
 they happened, so a future reader (human or AI) can see not just *what*
 changed but *why*. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased] — 2026-07-30 — Figma redesign wave (Home, Sample Reports, About, Booklet, Second Look, Contact)
+
+### Context
+
+The client shared actual screenshots of the approved Figma file for the
+first time today — 9 screens total: Home, Sample Reports, About, The
+Booklet (default + thank-you states), The Second Look (default +
+thank-you states), and Contact (default + thank-you states). No screen
+for What We Do (/services) was included, so that page still reflects
+the original Copy Deck build from the Initial v1 Scaffold entry below.
+
+This is a full redesign, not a visual refresh: every page's copy,
+structure, and several site-wide elements (header, footer) differ
+substantially from what the Initial v1 Scaffold entry below describes.
+Rebuilt all 6 pages + their thank-you states to match. What follows are
+the changes and, importantly, the places where the new design conflicts
+with the original Build Brief v2's explicit hard requirements — flagged
+to the client, not silently resolved.
+
+### Site-wide changes
+
+- **Header logo replaced with a text wordmark.** All 9 approved Figma
+  screens show "THE PLAIN OFFICE" as plain serif text, not the supplied
+  circular emblem image (`logo_h_web.png`). Changed `SiteHeader.astro`
+  to match. **Conflicts with Build Brief v2's explicit instruction to
+  use the logo image in the header — flagged, not resolved.**
+- **Footer replaced entirely.** Old footer (cream, phone/address/email/
+  Luke 14:28 verse) replaced with a dark navy, text-only footer:
+  "THE PLAIN OFFICE" + Privacy Policy / Terms of Service / Contact Us
+  links (current page underlined) + a copyright line. Phone is no
+  longer shown in the footer, but remains on every page via the header,
+  so the "phone visible on every page" requirement still holds overall.
+- **Two new pages are now referenced but don't exist**: `/privacy` and
+  `/terms`, linked from the new footer. Not built — out of the
+  original 7-page scope, no content supplied.
+- **Contact placeholders updated** (`src/data/site.ts`) to the values
+  shown consistently across all 9 new screens: phone `(717) 555-0123`,
+  fax `(717) 555-0124`, email `inquiries@plainoffice.com`, address
+  "1420 Bookbinder Lane, Suite 400, Philadelphia, PA 19102." Still
+  placeholders (the street name reads like one) — confirm before launch.
+- **Tagline changed** from "We handle the office. You run the
+  business." to "Reliable numbers, better decisions, a bridge to what's
+  next." — matches the new footer/copyright line across every screen.
+- Added 9 new line icons to `Icon.astro` (shield, compass, truck, tag,
+  courier, phone, fax, at, envelope-check) for the new icon-card grids.
+- Removed `FaqAccordion.astro`, `PullQuote.astro`, `NoticeBox.astro`,
+  `CTAButtons.astro` — no longer used anywhere after this rewrite.
+  Pruned the now-unused `Faq`, `ServiceCard`, `Step`, `ListItem` types.
+
+### Per-page changes
+
+- **Home** — already rebuilt earlier today from the client's first
+  Figma screenshot; see that work above (unchanged in this pass).
+- **Sample Reports** — new "Report Overview" box (Four Pillars of
+  Analysis) and restyled gallery section. **The six real report
+  artifacts from `samples_fragment.html` were kept as-is**, not
+  replaced with the Figma's generic relabeled photo cards ("Monthly
+  Summary," "AR Aging," etc.) — Build Brief v2 §3 explicitly and
+  repeatedly requires the supplied artifacts be used unmodified with
+  their own captions. Restyled the surrounding page chrome to match
+  Figma; kept the actual gallery content mandated by the Brief. Also
+  kept the §3-required "no client figures appear here" disclaimer,
+  which the new Figma screen omits entirely — moved it directly above
+  the gallery so it stays legally/functionally present without
+  cluttering the new hero.
+- **About** — full rewrite: "Built to still be here in twenty years,"
+  Privacy Promise, Plain Conventions (3 icons), An Honest Fit / The
+  Verdict. No source photo was supplied for the desk/ledger image
+  shown in Figma — placeholder box in its place.
+- **The Booklet** — full rewrite: new framing ("A Manual for Better
+  Decisions"), new 4-chapter table of contents with page numbers, new
+  excerpt, and a **new form** (Organization instead of Business/Trade,
+  a structured Street/City/Postal address, and email marked required).
+  **Email is shown as required (with `*`) per the approved design, but
+  is deliberately not enforced** — no `required` HTML attribute, and
+  the server-side handler (`src/pages/api/booklet.ts`) does not reject
+  a submission missing it. Build Brief v2 §6 is explicit that no action
+  on the site may require an email address; this audience often has
+  none. Flagged to the client as a likely-unintentional side effect of
+  adopting the new form design — the visual asterisk is kept pending
+  their confirmation, the actual blocking behavior is not.
+- **The Second Look** — full rewrite: "A Careful Review of Your Books,"
+  and a changed economic framing. The Second Look is no longer "$500,
+  paid upfront, credited against setup" (the original Copy Deck and
+  Build Brief) — it now reads as a review with **"a $500 credit toward
+  future bookkeeping services if you choose to continue,"** consistent
+  with Home's "we review your last three months for free" line from
+  the earlier Home rebuild. The old six-question FAQ and "what it
+  costs" monthly-pricing sections are dropped; "How We Get Your
+  Records" replaces the old "getting your records to us" copy, with
+  different terms (50-mile radius, bonded courier, secure prepaid
+  lockbox vs. the original "an hour or two," "prepaid UPS label"). The
+  thank-you paragraph is the one piece of copy that carried over
+  unchanged from the original Copy Deck.
+- **Contact** — full rewrite: "Correspondence Routes" (4 icon rows:
+  Write, Telephone, Facsimile, Electronic Mail) replaces the old
+  four-card grid, and the form is now a "Direct Inquiry Form" with a
+  Preferred Reach Method dropdown and a single free-text Contact
+  Identifier field, rather than three separate optional telephone/
+  address/email inputs. No source photo supplied for the mail-slot
+  image shown in Figma — placeholder box in its place. Footer's
+  "Contact Us" link correctly underlines as the active page here.
+
+### Fixed during this pass
+
+- Contact page's two-column ratio (`1fr 1.3fr`, form column wider) —
+  the shared `.two-col` default (`1.5fr 1fr`) made sense for Home/
+  Booklet/Second Look, where the narrower column is a small side card,
+  but on Contact it starved the form column and truncated dropdown/
+  input text. Overridden per-page rather than changing the shared
+  default and affecting the other pages.
+- A missing space in the Booklet thank-you page ("here:Counting the
+  Cost" instead of "here: Counting the Cost") caused by JSX whitespace
+  collapsing between an expression and adjacent text — fixed with an
+  explicit `{' '}`.
+
+### Verification
+
+Built clean with no errors or warnings. Ran the compiled server
+locally and screenshotted all 6 rebuilt pages plus all 3 thank-you
+states at 1280px — confirmed structure, section order, and colors
+match the approved screens. Re-ran the same form-endpoint smoke test
+as the Initial v1 Scaffold entry (missing-required-field redirects,
+honeypot silent-success, valid-submission redirects, rate limiting)
+against the new field names — all passed. `/services` (untouched)
+still builds and renders.
+
+### Still open
+
+- No Figma screen was provided for What We Do (/services) — still
+  running the original Copy Deck version.
+- Two real photo assets are needed and don't exist yet: the ledger/
+  desk scene on About, and the mail-slot image on Contact. Both are
+  placeholder boxes right now.
+- `/privacy` and `/terms` are linked from the footer but have no pages.
+- The header-logo-vs-wordmark and required-email conflicts above need
+  the client's explicit confirmation before launch.
+
+---
+
 ## [Unreleased] — 2026-07-30 — Initial v1 scaffold
 
 ### Context

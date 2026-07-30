@@ -1,5 +1,5 @@
 // Verbatim from "Website Copy Deck" v2, section "What We Do (/services)".
-import type { LeakItem, ListItem, OfficeOption } from '../types';
+import type { LeakItem, OfficeOption } from '../types';
 
 export const services = {
   kicker: 'What We Do',

@@ -1,6 +1,10 @@
 ---
-import { Image } from 'astro:assets';
-import logoH from '../assets/logo_h_web.png';
+// Text wordmark, not the image logo — every one of the eight approved
+// Figma screens reviewed 2026-07-30 shows "THE PLAIN OFFICE" as plain
+// serif text in the header, not the circular emblem image. Flagged to
+// the client: this departs from the Build Brief's instruction to use
+// logo_h_web.png in the header. Following the Figma pending their
+// confirmation. See CHANGELOG.md.
 import { site } from '../data/site';
 
 interface Props {
@@ -11,9 +15,7 @@ const { currentPath } = Astro.props;
 
 <header class="site-head">
   <div class="head-inner">
-    <a class="brand" href="/" aria-label={`${site.name} — home`}>
-      <Image src={logoH} alt={`${site.name} — Bookkeeping & Business Support`} width={220} widths={[220, 440]} />
-    </a>
+    <a class="brand brand-text" href="/" aria-label={`${site.name} — home`}>THE PLAIN OFFICE</a>
     <nav class="site-nav" aria-label="Primary">
       {site.nav.map((item) => (
         <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>

@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import TitledCard from '../components/TitledCard.astro';
-import FaqAccordion from '../components/FaqAccordion.astro';
+import Icon from '../components/Icon.astro';
 import SecondLookForm from '../components/forms/SecondLookForm.astro';
 import { secondLook } from '../data/copy/second-look';
 
@@ -9,56 +8,50 @@ const title = `${secondLook.headline} — The Plain Office`;
 ---
 
 <BaseLayout title={title} description={secondLook.intro} path="/second-look">
-  <section class="section">
+  <section class="section" style="background:var(--color-cream-2); text-align:center;">
     <div class="wrap">
       <p class="kicker">{secondLook.kicker}</p>
       <h1>{secondLook.headline}</h1>
-      <p class="lede">{secondLook.intro}</p>
+      <p class="lede" style="margin:0 auto; text-align:center;">{secondLook.intro}</p>
+      <div class="notice" style="max-width:44em; margin:24px auto 0; text-align:center;">{secondLook.creditNote}</div>
     </div>
   </section>
 
-  <section class="section" style="background:var(--color-cream);">
+  <section class="section" style="background:var(--color-cream-2);">
     <div class="wrap">
-      <div class="card" style="max-width:44em;">
-        <h2 style="margin-top:0;">{secondLook.terms.heading}</h2>
-        <p style="margin:0; color:var(--color-ink-secondary);">{secondLook.terms.body}</p>
+      <hr class="divider-line" style="margin-bottom:40px;" />
+      <div class="two-col">
+        <h3 style="border-bottom:1px solid var(--color-rule-2); padding-bottom:12px;">{secondLook.terms.heading}</h3>
+        <div>
+          {secondLook.terms.paragraphs.map((p) => <p style="color:var(--color-ink-secondary);">{p}</p>)}
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap prose">
-      <h2>{secondLook.gettingRecordsToUs.heading}</h2>
-      {secondLook.gettingRecordsToUs.paragraphs.map((p) => <p>{p}</p>)}
-    </div>
-  </section>
-
   <section class="section" style="background:var(--color-cream);">
-    <div class="wrap">
-      <h2>{secondLook.whatHappensAfter.heading}</h2>
-      <div class="card-grid" style="margin-top:20px;">
-        {secondLook.whatHappensAfter.steps.map((step) => <TitledCard title={step.title} body={step.body} />)}
+    <div class="wrap" style="text-align:center;">
+      <h2 class="no-rule">{secondLook.gettingRecords.heading}</h2>
+      <p class="small-note" style="margin-bottom:28px;">{secondLook.gettingRecords.subtext}</p>
+      <div class="card-grid" style="grid-template-columns:repeat(3, 1fr); text-align:left;">
+        {secondLook.gettingRecords.options.map((opt) => (
+          <div class="icon-card">
+            <Icon name={opt.icon as any} />
+            <h3 style="font-size:13px; letter-spacing:.06em; text-transform:uppercase;">{opt.title}</h3>
+            <p>{opt.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap prose">
-      <h2>{secondLook.cost.heading}</h2>
-      {secondLook.cost.paragraphs.map((p) => <p>{p}</p>)}
-    </div>
-  </section>
-
-  <section class="section" style="background:var(--color-cream);">
+  <section class="section" style="background:var(--color-cream-2); text-align:center;">
     <div class="wrap">
-      <h2>{secondLook.faqHeading}</h2>
-      <FaqAccordion items={secondLook.faqs} />
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <SecondLookForm />
+      <div class="form-card" style="max-width:640px; margin:0 auto; text-align:left;">
+        <h2 class="no-rule" style="text-align:center;">{secondLook.form.heading}</h2>
+        <p class="small-note" style="text-align:center; margin-bottom:28px;">{secondLook.form.subtext}</p>
+        <SecondLookForm />
+      </div>
     </div>
   </section>
 </BaseLayout>

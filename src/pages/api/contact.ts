@@ -19,9 +19,6 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 
   const name = str(formData, 'name');
   const message = str(formData, 'message');
-  const telephone = str(formData, 'telephone');
-  const address = str(formData, 'address');
-  const email = str(formData, 'email');
 
   if (!name) {
     return redirect('/contact?error=name', 303);
@@ -29,23 +26,19 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   if (!message) {
     return redirect('/contact?error=message', 303);
   }
-  if (!telephone && !address && !email) {
-    return redirect('/contact?error=reach', 303);
-  }
 
   const data = {
     name,
     business_and_trade: str(formData, 'business_and_trade'),
-    telephone,
-    address,
-    email,
+    reach_method: str(formData, 'reach_method'),
+    contact_identifier: str(formData, 'contact_identifier'),
     message,
   };
 
   await Promise.all([
     notifyOffice(
       'Contact form — theplainoffice.com',
-      `Name: ${data.name}\nBusiness/trade: ${data.business_and_trade}\nTelephone: ${data.telephone}\nAddress: ${data.address}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
+      `Name: ${data.name}\nBusiness/trade: ${data.business_and_trade}\nPreferred reach method: ${data.reach_method}\nContact identifier: ${data.contact_identifier}\n\nMessage:\n${data.message}`
     ),
     logSubmission('contact', data),
   ]);

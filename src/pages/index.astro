@@ -1,87 +1,165 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CTAButtons from '../components/CTAButtons.astro';
-import TitledCard from '../components/TitledCard.astro';
-import PullQuote from '../components/PullQuote.astro';
-import FaqAccordion from '../components/FaqAccordion.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 import { home } from '../data/copy/home';
 ---
 
 <BaseLayout title={site.browserTitle} description={site.metaDescription} path="/">
-  <section class="section hero">
+  <!-- Hero -->
+  <section class="section" style="background:var(--color-white);">
     <div class="wrap">
       <p class="kicker">{home.hero.kicker}</p>
       <h1>{home.hero.headline}</h1>
       <p class="lede" style="margin-bottom:28px;">{home.hero.paragraph}</p>
-      <CTAButtons />
+      <div class="btn-group">
+        <a class="btn btn-primary" href={site.ctaBooklet.href}>{site.ctaBooklet.label}</a>
+        <a class="btn btn-secondary" href={site.ctaSecondLook.href}>{site.ctaSecondLook.label}</a>
+      </div>
+      <p class="small-note" style="margin-top:16px; font-style:italic;">
+        Or call us at <a href={site.phoneHref}>{site.phoneDisplay}</a> to talk to a real person.
+      </p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap prose">
-      <h2>{home.deskInCorner.heading}</h2>
-      {home.deskInCorner.paragraphs.map((p) => <p>{p}</p>)}
-      <PullQuote>{home.deskInCorner.pullQuote}</PullQuote>
-    </div>
-  </section>
-
-  <section class="section" style="background:var(--color-cream);">
+  <!-- The desk in the corner -->
+  <section class="section" style="background:var(--color-cream-2);">
     <div class="wrap">
-      <h2>{home.questions.heading}</h2>
-      <p class="section-lede" style="margin-bottom:20px;">{home.questions.intro}</p>
-      <div class="card">
-        <ul style="margin:0; padding-left:1.1em; color:var(--color-ink-secondary);">
-          {home.questions.items.map((item) => <li style="margin-bottom:12px;">{item}</li>)}
-        </ul>
+      <div class="two-col">
+        <div>
+          <h2 class="no-rule">{home.deskInCorner.heading}</h2>
+          <p style="color:var(--color-ink-secondary); max-width:42em;">{home.deskInCorner.paragraph}</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <h3 style="text-transform:uppercase; font-size:14px; letter-spacing:.08em;">{home.deskInCorner.missionCard.title}</h3>
+          <p style="margin:0; font-style:italic; color:var(--color-ink-secondary);">{home.deskInCorner.missionCard.body}</p>
+        </div>
+      </div>
+      <div class="notice" style="margin-top:32px; max-width:none;">{home.deskInCorner.pullQuote}</div>
+    </div>
+  </section>
+
+  <!-- The questions your books should answer -->
+  <section class="section" style="background:var(--color-white);">
+    <div class="wrap">
+      <div class="numbered-row">
+        {home.questions.items.map((q, i) => (
+          <div class="numbered-row-item">
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <p class="q">{q}</p>
+          </div>
+        ))}
+      </div>
+      <h2 class="no-rule" style="text-align:center; margin-top:36px;">{home.questions.heading}</h2>
+    </div>
+  </section>
+
+  <!-- Practical Support -->
+  <section class="section" style="background:var(--color-white);">
+    <div class="wrap">
+      <h2 class="rule-above">{home.practicalSupport.heading}</h2>
+      <div class="card-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); margin-top:24px;">
+        {home.practicalSupport.cards.map((card) => (
+          <div class="icon-card">
+            <Icon name={card.icon as any} />
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>{home.whatWeDo.heading}</h2>
-      <div class="card-grid" style="margin-top:24px;">
-        {home.whatWeDo.cards.map((card) => <TitledCard title={card.title} body={card.body} />)}
+  <!-- See the report before you ask for it -->
+  <section class="section" style="background:var(--color-cream-2);">
+    <div class="wrap" style="text-align:center;">
+      <p class="small-note">{home.seeReport.eyebrow}</p>
+      <h2 class="no-rule">{home.seeReport.heading}</h2>
+      <div class="report-mock" style="margin-top:32px; text-align:left;">
+        <div class="report-mock-head">
+          <h3 style="margin:0;">{home.seeReport.card.title}</h3>
+          <span class="brand">{home.seeReport.card.brand}</span>
+        </div>
+        <p class="report-mock-sub">{home.seeReport.card.subtitle}</p>
+        <div class="report-mock-body">
+          <div class="report-mock-lines">
+            {home.seeReport.card.lines.map((line) => (
+              <div class={`report-mock-line ${line.tone === 'total' ? 'total' : ''}`}>
+                <span>{line.label}</span>
+                <span class={`value ${line.tone === 'negative' ? 'negative' : ''}`}>{line.value}</span>
+              </div>
+            ))}
+          </div>
+          <div class="report-mock-chart">{home.seeReport.card.chartLabel}</div>
+        </div>
+        <p class="report-mock-note">{home.seeReport.card.note}</p>
       </div>
-      <p class="center-link" style="margin-top:28px;"><a href={home.whatWeDo.link.href}>{home.whatWeDo.link.label}</a></p>
     </div>
   </section>
 
-  <section class="section" style="background:var(--color-cream);">
-    <div class="wrap">
-      <h2>{home.seeReport.heading}</h2>
-      <p class="section-lede">{home.seeReport.paragraph}</p>
-      <p style="margin-top:24px;"><a class="btn btn-primary" href={home.seeReport.button.href}>{home.seeReport.button.label}</a></p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <h2>{home.threeSteps.heading}</h2>
-      <div class="card-grid" style="margin-top:24px;">
-        {home.threeSteps.steps.map((step) => <TitledCard title={step.title} body={step.body} />)}
-      </div>
-      <p class="center-link" style="margin-top:28px;"><a href={home.threeSteps.link.href}>{home.threeSteps.link.label}</a></p>
-    </div>
-  </section>
-
+  <!-- Three steps -->
   <section class="section cta-band">
     <div class="wrap">
-      <div class="card">
-        <p class="kicker">{home.bookletBand.kicker}</p>
-        <h2 style="margin-bottom:14px;">{home.bookletBand.heading}</h2>
-        <p style="color:var(--color-ink-secondary); margin-bottom:20px;">{home.bookletBand.paragraph}</p>
-        <a class="btn btn-primary" href={home.bookletBand.button.href}>{home.bookletBand.button.label}</a>
+      <div class="step-badges">
+        {home.threeSteps.steps.map((step) => (
+          <div class="step-badge">
+            <span class="step-badge-num">{step.number}</span>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+        ))}
+      </div>
+      <h2 style="color:var(--color-cream); text-align:center; margin-top:40px;">{home.threeSteps.heading}</h2>
+    </div>
+  </section>
+
+  <!-- Free Resource -->
+  <section class="section" style="background:var(--color-cream-2);">
+    <div class="wrap">
+      <div class="two-col">
+        <div>
+          <p class="kicker">{home.freeResource.kicker}</p>
+          <h2 class="no-rule" style="font-style:italic;">{home.freeResource.title}</h2>
+          <p style="color:var(--color-ink-secondary);">{home.freeResource.paragraph}</p>
+          <ul class="checklist">
+            {home.freeResource.checklist.map((item) => <li>{item}</li>)}
+          </ul>
+          <a href={home.freeResource.linkHref} style="color:var(--color-bronze); font-weight:700; letter-spacing:.06em; text-transform:uppercase; font-size:13px;">
+            {home.freeResource.linkLabel}
+          </a>
+        </div>
+        <div class="card" style="display:flex; align-items:center; justify-content:center; min-height:220px; text-align:center; color:var(--color-ink-muted); font-size:13px;">
+          <!-- Placeholder: no product photo of the printed booklet was
+               supplied. Replace with a real photo before launch. -->
+          Booklet photo — placeholder
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- Plain answers -->
+  <section class="section" style="background:var(--color-cream-2);">
     <div class="wrap">
-      <h2>{home.faqTeaser.heading}</h2>
-      <FaqAccordion items={home.faqTeaser.items} openFirst />
-      <p class="center-link" style="margin-top:20px;"><a href={home.faqTeaser.link.href}>{home.faqTeaser.link.label}</a></p>
+      <div class="faq-rows">
+        {home.faqTeaser.items.map((item) => (
+          <div class="faq-row">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </div>
+      <h2 class="no-rule" style="text-align:center; margin-top:32px;">{home.faqTeaser.heading}</h2>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="section" style="background:var(--color-white); text-align:center;">
+    <div class="wrap">
+      <hr class="divider-line" style="margin-bottom:40px;" />
+      <a class="btn btn-primary" href={site.ctaSecondLook.href}>{site.ctaSecondLook.label}</a>
+      <h2 class="no-rule" style="margin-top:24px;">{home.finalCta.heading}</h2>
+      <p class="small-note" style="font-style:italic;">{home.finalCta.note}</p>
+      <hr class="divider-line" style="margin-top:40px;" />
     </div>
   </section>
 </BaseLayout>

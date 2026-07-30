@@ -1,31 +1,42 @@
-// Verbatim from "Website Copy Deck" v2, section "Contact (/contact)".
-// Phone/fax/mail/email values themselves live in src/data/site.ts
-// (single source, reused across header/footer/contact) so they are
-// never typed twice and can never drift out of sync.
+// Contact page — matches the approved Figma screen (2026-07-30).
+// Full rewrite: "Correspondence Routes" (Write/Telephone/Facsimile/
+// Electronic Mail with icons) replaces the old four-channel list, and
+// the form is now a "Direct Inquiry Form" with a reach-method dropdown
+// instead of a plain three-checkbox "how shall we reach you." Phone/
+// fax/mail/email values themselves still live in src/data/site.ts.
 
 export const contact = {
-  kicker: 'Contact',
-  headline: 'Reach us by the road you prefer',
+  headline: 'Reach us by the road you prefer.',
   intro:
-    'Mail, telephone, fax, or email — all four lead to the same desk. A note of two or three sentences is plenty: what the business does, and how the books are kept today. We answer within two business days, by the same road you used.',
+    'We maintain traditional avenues of correspondence alongside modern methods, ensuring our accessibility matches your preferred mode of professional communication.',
 
-  channels: {
-    write: { heading: 'Write' },
-    telephone: { heading: 'Telephone' },
-    fax: { heading: 'Fax' },
-    email: { heading: 'Email' },
-  },
+  routesHeading: 'Correspondence Routes',
+  routes: [
+    { icon: 'mail', label: 'Write' },
+    { icon: 'phone', label: 'Telephone' },
+    { icon: 'fax', label: 'Facsimile' },
+    { icon: 'at', label: 'Electronic Mail' },
+  ],
 
   form: {
-    heading: 'Or use this form',
-    reachLabel: 'How shall we reach you?',
-    reachHint: 'Telephone, address, or email — at least one.',
-    messageLabel: 'Your message',
-    submitLabel: 'Send',
+    heading: 'Direct Inquiry Form',
+    subtext: 'Please provide your details below. We aim to respond within one business day.',
+    nameLabel: 'Full Name / Salutation',
+    namePlaceholder: 'e.g., Jane Doe',
+    businessLabel: 'Business or Trade',
+    businessPlaceholder: 'e.g., Mercantile Co.',
+    reachMethodLabel: 'Preferred Reach Method',
+    reachMethodChoices: ['Electronic Mail', 'Telephone', 'Write', 'Facsimile'],
+    identifierLabel: 'Contact Identifier',
+    identifierPlaceholder: 'Email address or Phone number',
+    messageLabel: 'Message or Inquiry',
+    messagePlaceholder: 'Please detail the nature of your request…',
+    submitLabel: 'Submit Inquiry',
   },
 
   thankYou: {
     heading: 'Thank you kindly.',
     body: 'We will answer within two business days, by whichever way you gave us.',
+    returnLinkLabel: 'Return to Home',
   },
 } as const;

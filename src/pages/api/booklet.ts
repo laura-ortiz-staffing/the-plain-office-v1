@@ -21,31 +21,32 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 
   const delivery = str(formData, 'delivery') || 'mail_and_pdf';
   const name = str(formData, 'name');
-  const mailingAddress = str(formData, 'mailing_address');
-  const townStateZip = str(formData, 'town_state_zip');
+  const streetAddress = str(formData, 'street_address');
 
   if (!name) {
     return redirect('/booklet?error=name', 303);
   }
-  if (delivery !== 'pdf' && (!mailingAddress || !townStateZip)) {
-    return redirect('/booklet?error=mailing_address', 303);
+  if (delivery !== 'pdf' && !streetAddress) {
+    return redirect('/booklet?error=street_address', 303);
   }
 
+  // Email is shown as required in the approved design, but is
+  // deliberately NOT enforced here — the Build Brief prohibits
+  // requiring email anywhere on the site. See CHANGELOG.md.
   const data = {
     delivery,
     name,
-    business_name: str(formData, 'business_name'),
-    trade: str(formData, 'trade'),
-    mailing_address: mailingAddress,
-    town_state_zip: townStateZip,
-    telephone: str(formData, 'telephone'),
+    organization: str(formData, 'organization'),
     email: str(formData, 'email'),
+    street_address: streetAddress,
+    city: str(formData, 'city'),
+    postal_code: str(formData, 'postal_code'),
   };
 
   await Promise.all([
     notifyOffice(
       'Booklet request — theplainoffice.com',
-      `Delivery: ${data.delivery}\nName: ${data.name}\nBusiness: ${data.business_name}\nTrade: ${data.trade}\nMailing address: ${data.mailing_address}, ${data.town_state_zip}\nTelephone: ${data.telephone}\nEmail: ${data.email}`
+      `Delivery: ${data.delivery}\nName: ${data.name}\nOrganization: ${data.organization}\nEmail: ${data.email}\nAddress: ${data.street_address}, ${data.city} ${data.postal_code}`
     ),
     logSubmission('booklet', data),
   ]);

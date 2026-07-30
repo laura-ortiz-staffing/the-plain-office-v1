@@ -1,25 +1,24 @@
 ---
-import { Image } from 'astro:assets';
-import logoV from '../assets/logo_v_web.png';
+// Dark navy, text-only footer matching the approved Figma screens
+// (2026-07-30) — drops the phone/address/verse the old footer showed
+// directly, since the header now carries the phone on every page and
+// full contact details live on /contact. See CHANGELOG.md.
 import { site } from '../data/site';
+
+interface Props {
+  currentPath?: string;
+}
+const { currentPath } = Astro.props;
 ---
 
-<footer class="site-foot">
+<footer class="site-foot-dark">
   <div class="wrap">
-    <Image src={logoV} alt={site.name} width={140} widths={[140, 280]} style="margin: 0 auto 20px;" />
-    <p class="foot-contact" style="text-align:center; font-weight:700; color:var(--color-navy); font-family:var(--font-serif);">
-      {site.tagline}
-    </p>
-    <p class="foot-contact">
-      Telephone <a href={site.phoneHref}>{site.phoneDisplay}</a> &middot; Fax {site.faxDisplay}<br />
-      Mail: {site.name}, {site.mailingAddressLine1}, {site.mailingAddressLine2}<br />
-      Email: <a href={`mailto:${site.email}`}>{site.email}</a>
-    </p>
-    <ul class="foot-links">
-      {site.nav.map((item) => (
-        <li><a href={item.href}>{item.label}</a></li>
+    <p class="foot-brand">{site.name.toUpperCase()}</p>
+    <ul class="foot-links-dark">
+      {site.footerLinks.map((item) => (
+        <li><a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a></li>
       ))}
     </ul>
-    <p class="foot-verse">{site.verse}</p>
+    <p class="foot-copyright">&copy; 2026 {site.name.toUpperCase()}. {site.tagline}</p>
   </div>
 </footer>

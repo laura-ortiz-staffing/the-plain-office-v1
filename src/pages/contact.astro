@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
 import ContactForm from '../components/forms/ContactForm.astro';
 import { contact } from '../data/copy/contact';
 import { site } from '../data/site';
@@ -8,38 +9,48 @@ const title = `${contact.headline} — The Plain Office`;
 ---
 
 <BaseLayout title={title} description={contact.intro} path="/contact">
-  <section class="section">
+  <section class="section" style="background:var(--color-cream-2); text-align:center;">
     <div class="wrap">
-      <p class="kicker">{contact.kicker}</p>
       <h1>{contact.headline}</h1>
-      <p class="lede">{contact.intro}</p>
+      <p class="lede" style="margin:0 auto; text-align:center;">{contact.intro}</p>
     </div>
   </section>
 
-  <section class="section" style="background:var(--color-cream);">
-    <div class="wrap card-grid">
-      <div class="card">
-        <h3>{contact.channels.write.heading}</h3>
-        <p style="margin:0;">{site.name}<br />{site.mailingAddressLine1}<br />{site.mailingAddressLine2}</p>
-      </div>
-      <div class="card">
-        <h3>{contact.channels.telephone.heading}</h3>
-        <p style="margin:0;"><a href={site.phoneHref}>{site.phoneDisplay}</a><br /><span class="small-note">{site.businessHoursNote}</span></p>
-      </div>
-      <div class="card">
-        <h3>{contact.channels.fax.heading}</h3>
-        <p style="margin:0;">{site.faxDisplay}</p>
-      </div>
-      <div class="card">
-        <h3>{contact.channels.email.heading}</h3>
-        <p style="margin:0;"><a href={`mailto:${site.email}`}>{site.email}</a></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
+  <section class="section" style="background:var(--color-cream-2);">
     <div class="wrap">
-      <ContactForm />
+      <hr class="divider-line" style="margin-bottom:40px;" />
+      <div class="two-col" style="grid-template-columns: 1fr 1.3fr;">
+        <div>
+          <h3 style="border-bottom:1px solid var(--color-rule-2); padding-bottom:12px;">{contact.routesHeading}</h3>
+          <ul class="routes-list">
+            <li>
+              <Icon name="mail" size={22} />
+              <div><h3>Write</h3><p>{site.name}<br />{site.mailingAddressLine1}<br />{site.mailingAddressLine2}</p></div>
+            </li>
+            <li>
+              <Icon name="phone" size={22} />
+              <div><h3>Telephone</h3><p>Direct: <a href={site.phoneHref}>{site.phoneDisplay}</a><br />{site.businessHoursNote}</p></div>
+            </li>
+            <li>
+              <Icon name="fax" size={22} />
+              <div><h3>Facsimile</h3><p>{site.faxDisplay}</p></div>
+            </li>
+            <li>
+              <Icon name="at" size={22} />
+              <div><h3>Electronic Mail</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
+            </li>
+          </ul>
+          <div class="photo-frame" style="padding:0;">
+            <div class="photo-placeholder" style="min-height:200px;">Photo — placeholder</div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h2 class="no-rule">{contact.form.heading}</h2>
+          <p class="small-note" style="font-style:italic; margin-bottom:24px;">{contact.form.subtext}</p>
+          <ContactForm />
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

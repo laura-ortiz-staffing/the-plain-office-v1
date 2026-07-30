@@ -1,36 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import NoticeBox from '../components/NoticeBox.astro';
 import SampleReportGallery from '../components/SampleReportGallery.astro';
 import { samples } from '../data/copy/samples';
 
 const title = `${samples.headline} — The Plain Office`;
+const description = samples.overview.paragraph;
 ---
 
-<BaseLayout title={title} description={samples.intro} path="/samples">
-  <section class="section">
+<BaseLayout title={title} description={description} path="/samples">
+  <section class="section" style="background:var(--color-white); text-align:center;">
     <div class="wrap">
       <p class="kicker">{samples.kicker}</p>
       <h1>{samples.headline}</h1>
-      <p class="lede">{samples.intro}</p>
-      <p class="small-note" style="font-style:italic; margin-top:10px;">{samples.verse}</p>
-      <div style="margin-top:20px;">
-        <NoticeBox>{samples.disclaimer}</NoticeBox>
+      <div class="notice" style="max-width:44em; margin:24px auto 0; text-align:left;">{samples.verse}</div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-white);">
+    <div class="wrap">
+      <div class="overview-box">
+        <div class="two-col">
+          <div>
+            <h2 class="no-rule">{samples.overview.heading}</h2>
+            <p style="color:var(--color-ink-secondary);">{samples.overview.paragraph}</p>
+          </div>
+          <div>
+            <p class="eyebrow">{samples.overview.pillarsEyebrow}</p>
+            <p style="font-style:italic; color:var(--color-ink-secondary);">{samples.overview.pillarsIntro}</p>
+          </div>
+        </div>
+        <div class="pillars-grid">
+          {samples.overview.pillars.map((p) => (
+            <div>
+              <h4>{p.title}</h4>
+              <p>{p.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section" style="background:var(--color-cream);">
+  <section class="section" style="background:var(--color-white); text-align:center;">
     <div class="wrap">
-      <SampleReportGallery />
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap prose">
-      <h2>{samples.fitted.heading}</h2>
-      {samples.fitted.paragraphs.map((p) => <p>{p}</p>)}
-      <a class="btn btn-primary" href={samples.fitted.button.href}>{samples.fitted.button.label}</a>
+      <h2 class="no-rule">{samples.galleryHeading}</h2>
+      <p class="small-note" style="font-style:italic; max-width:40em; margin:12px auto 0;">{samples.disclaimer}</p>
+      <div style="margin-top:32px; text-align:left;">
+        <SampleReportGallery />
+      </div>
+      <a class="btn btn-primary" href={samples.cta.href} style="margin-top:36px; display:inline-flex;">{samples.cta.label}</a>
     </div>
   </section>
 </BaseLayout>
