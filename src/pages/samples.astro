@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SampleReportGallery from '../components/SampleReportGallery.astro';
 import { samples } from '../data/copy/samples';
 
 const title = `${samples.headline} — The Plain Office`;
@@ -44,9 +43,14 @@ const description = samples.overview.paragraph;
   <section class="section" style="background:var(--color-white); text-align:center;">
     <div class="wrap">
       <h2 class="no-rule">{samples.galleryHeading}</h2>
-      <p class="small-note" style="font-style:italic; max-width:40em; margin:12px auto 0;">{samples.disclaimer}</p>
-      <div style="margin-top:32px; text-align:left;">
-        <SampleReportGallery />
+      <div class="card-grid" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); margin-top:32px;">
+        {samples.gallery.map((item) => (
+          <div class="gallery-card">
+            <div class="photo-placeholder">Photo — placeholder</div>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
       </div>
       <a class="btn btn-primary" href={samples.cta.href} style="margin-top:36px; display:inline-flex;">{samples.cta.label}</a>
     </div>

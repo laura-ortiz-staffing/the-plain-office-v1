@@ -47,7 +47,7 @@ const errorMessage = errorField ? errorMessages[errorField] : null;
     <textarea id="contact-message" name="message" placeholder={contact.form.messagePlaceholder} class={errorField === 'message' ? 'field-missing' : ''}></textarea>
   </div>
 
-  <div class="form-actions-right">
+  <div class="form-actions-center">
     <button class="btn btn-primary" type="submit">{contact.form.submitLabel}</button>
   </div>
 </form>

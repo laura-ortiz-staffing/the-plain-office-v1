@@ -142,6 +142,29 @@ still builds and renders.
 - The header-logo-vs-wordmark and required-email conflicts above need
   the client's explicit confirmation before launch.
 
+### Follow-up fixes (same day) — form alignment and gallery
+
+- **Client feedback: forms across the site looked disordered and
+  misaligned, submit buttons weren't centered.** Root cause: `.field
+  .hint` (the small "Optional" label) was `display: block`, so a field
+  with a hint rendered one line taller than a neighboring field
+  without one — in a two-column row this broke the input boxes out of
+  alignment. Changed to inline, appended right after the label text
+  instead. Centered every form's submit button (`.form-actions-center`
+  for Booklet/Contact; a `.tpo-form > .btn` rule handles Second Look's
+  bare button) instead of the previous right/left-aligned placement.
+- **Client instruction: use the Figma's Sample Report Gallery (six
+  generic photo cards), not the real report artifacts kept in the
+  previous pass.** Replaced the `SampleReportGallery` component (real
+  supplied artifacts) with six placeholder-photo cards matching the
+  Figma exactly (Monthly Summary, Sales Comparison, Major Expenses, AR
+  Aging, Cash Trend, Books/Ledger). This fully removes Build Brief v2
+  §3's mandated real-artifact display from the live site — flagged
+  again, explicitly overridden by the client this time.
+  `SampleReportGallery.astro` and `samples_fragment.html` are left in
+  place, unused, in case this is revisited.
+- Verified all four changed pages by screenshot after rebuilding.
+
 ---
 
 ## [Unreleased] — 2026-07-30 — Initial v1 scaffold

@@ -1,12 +1,11 @@
 // Sample Reports page — matches the approved Figma screen (2026-07-30).
-// The six report artifacts themselves still come from the supplied
-// samples_fragment.html and are rendered as-is (see
-// SampleReportGallery.astro) — the Figma shows six generic relabeled
-// "photo" cards (Monthly Summary, Sales Comparison, etc.) instead, but
-// Build Brief v2 §3 is explicit and repeated: "used as-is, do not
-// redraw the charts or invent different numbers." Kept the real
-// artifacts; restyled the page chrome around them to match the Figma.
-// See CHANGELOG.md.
+// The gallery now shows the Figma's six generic photo cards (client
+// instruction, 2026-07-30) with placeholder images pending real
+// photography, NOT the six real report artifacts from
+// samples_fragment.html. That component is left in place, unused, in
+// case this decision changes — see CHANGELOG.md. Build Brief v2 §3's
+// requirement to show the real supplied artifacts "as-is" no longer
+// applies anywhere on the live site as a result; flagged, not resolved.
 
 export const samples = {
   kicker: 'Sample Reports',
@@ -27,12 +26,15 @@ export const samples = {
     ],
   },
 
-  // Build Brief v2 §3 requires this stated plainly, above the fold, on
-  // this page — kept even though the new Figma screen doesn't show it.
-  disclaimer:
-    'The report pages below belong to a sample shop, simplified for the page. No client’s private figures appear here, and none ever will.',
-
   galleryHeading: 'Sample Report Gallery',
+  gallery: [
+    { title: 'Monthly Summary', body: 'High-level snapshot of performance.' },
+    { title: 'Sales Comparison', body: 'Year-over-year and month-over-month trends.' },
+    { title: 'Major Expenses', body: 'Detailed breakdown of significant outlays.' },
+    { title: 'AR Aging', body: 'Status of outstanding customer invoices.' },
+    { title: 'Cash Trend', body: 'Historical and projected liquidity analysis.' },
+    { title: 'Books / Ledger', body: 'The foundational detailed transaction log.' },
+  ],
 
   cta: { label: 'Ask for the Second Look', href: '/second-look' },
 } as const;
