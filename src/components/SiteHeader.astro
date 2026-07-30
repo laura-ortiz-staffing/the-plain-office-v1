@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets';
+import logoH from '../assets/logo_h_web.png';
+import { site } from '../data/site';
+
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+---
+
+<header class="site-head">
+  <div class="head-inner">
+    <a class="brand" href="/" aria-label={`${site.name} — home`}>
+      <Image src={logoH} alt={`${site.name} — Bookkeeping & Business Support`} width={220} widths={[220, 440]} />
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      {site.nav.map((item) => (
+        <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <a class="head-phone" href={site.phoneHref}>{site.phoneDisplay}</a>
+  </div>
+</header>

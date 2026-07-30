@@ -1,0 +1,22 @@
+---
+// Native <details>/<summary> — fully keyboard operable and functional
+// with JavaScript disabled, per Build Brief v2 §7. The chevron ("+"/"−")
+// is drawn in CSS (see global.css .faq-item) so the affordance is never
+// hover-only and never icon-only without a label.
+import type { Faq } from '../data/types';
+
+interface Props {
+  items: readonly Faq[];
+  openFirst?: boolean;
+}
+const { items, openFirst = false } = Astro.props;
+---
+
+<div class="faq-list">
+  {items.map((item, i) => (
+    <details class="faq-item" open={openFirst && i === 0}>
+      <summary>{item.question}</summary>
+      <p>{item.answer}</p>
+    </details>
+  ))}
+</div>

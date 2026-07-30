@@ -1,0 +1,92 @@
+---
+import { secondLook } from '../../data/copy/second-look';
+
+const errorField = Astro.url.searchParams.get('error');
+const errorMessages: Record<string, string> = {
+  name: 'We need your name.',
+  trade: 'We need to know your trade or type of work.',
+  mailing_address: 'We need your mailing address.',
+  town_state_zip: 'We need your town, state, and ZIP.',
+  telephone: 'We need a telephone number to reach you.',
+  contact_pref: 'Please choose how you would like to hear from us.',
+  email: 'We need an email address, since you chose email above.',
+  rate_limited: 'That is a lot of requests in a short time — please try again in a minute.',
+};
+const errorMessage = errorField ? errorMessages[errorField] : null;
+
+function isMissing(field: string) {
+  return errorField === field ? 'field-missing' : '';
+}
+---
+
+<form class="tpo-form" method="post" action="/api/second-look" novalidate>
+  <h3>{secondLook.form.heading}</h3>
+  <p class="small-note">{secondLook.form.intro}</p>
+  {errorMessage && <p class="field-error" role="alert">{errorMessage}</p>}
+
+  <div class="honeypot-field" aria-hidden="true">
+    <label for="sl-website">Leave this field blank</label>
+    <input id="sl-website" type="text" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="field">
+    <label for="sl-name">Name</label>
+    <input id="sl-name" type="text" name="name" required class={isMissing('name')} />
+  </div>
+
+  <div class="field">
+    <label for="sl-business">Business name <span class="hint">Optional</span></label>
+    <input id="sl-business" type="text" name="business_name" />
+  </div>
+
+  <div class="field">
+    <label for="sl-trade">Trade or type of work</label>
+    <input id="sl-trade" type="text" name="trade" required class={isMissing('trade')} />
+  </div>
+
+  <div class="field">
+    <label for="sl-address">Mailing address</label>
+    <input id="sl-address" type="text" name="mailing_address" required class={isMissing('mailing_address')} />
+  </div>
+
+  <div class="field">
+    <label for="sl-town">Town, state, ZIP</label>
+    <input id="sl-town" type="text" name="town_state_zip" required class={isMissing('town_state_zip')} />
+  </div>
+
+  <div class="field">
+    <label for="sl-phone">Telephone</label>
+    <input id="sl-phone" type="tel" name="telephone" required class={isMissing('telephone')} />
+  </div>
+
+  <div class="field">
+    <label for="sl-time">Best time to call <span class="hint">Optional</span></label>
+    <input id="sl-time" type="text" name="best_time" placeholder={secondLook.form.bestTimePlaceholder} />
+  </div>
+
+  <div class="field">
+    <label for="sl-books">How are your books kept now? <span class="hint">Optional</span></label>
+    <textarea id="sl-books" name="books_kept_now" placeholder={secondLook.form.booksKeptPlaceholder}></textarea>
+  </div>
+
+  <div class="field">
+    <label id="sl-pref-label">Preferred way to hear from us</label>
+    <div class="choice-group" role="radiogroup" aria-labelledby="sl-pref-label">
+      {secondLook.form.contactPrefChoices.map((choice) => (
+        <div class="choice-option">
+          <input type="radio" id={`sl-pref-${choice}`} name="contact_pref" value={choice} required />
+          <label for={`sl-pref-${choice}`} style="margin:0; font-weight:400;">{choice}</label>
+        </div>
+      ))}
+    </div>
+    {errorField === 'contact_pref' && <p class="field-error" role="alert">{errorMessages.contact_pref}</p>}
+  </div>
+
+  <div class="field">
+    <label for="sl-email">Email <span class="hint">If chosen above</span></label>
+    <input id="sl-email" type="email" name="email" class={isMissing('email')} />
+  </div>
+
+  <button class="btn btn-primary" type="submit">{secondLook.form.submitLabel}</button>
+  <p class="small-note" style="margin-top:16px;">{secondLook.form.note}</p>
+</form>

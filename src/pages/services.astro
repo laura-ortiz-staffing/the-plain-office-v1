@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TitledCard from '../components/TitledCard.astro';
+import { services } from '../data/copy/services';
+
+const title = `${services.headline} — The Plain Office`;
+const description = services.intro;
+---
+
+<BaseLayout title={title} description={description} path="/services">
+  <section class="section">
+    <div class="wrap">
+      <p class="kicker">{services.kicker}</p>
+      <h1>{services.headline}</h1>
+      <p class="lede">{services.intro}</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-cream);">
+    <div class="wrap">
+      <div class="card-grid">
+        {services.officeOptions.map((opt) => <TitledCard title={opt.title} body={opt.body} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>{services.whatWeDoHeading}</h2>
+      <ul class="prose" style="color:var(--color-ink-secondary); margin-top:20px;">
+        {services.serviceList.map((item) => <li style="margin-bottom:10px;">{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-cream);">
+    <div class="wrap">
+      <h2>{services.leaksHeading}</h2>
+      <p class="section-lede" style="margin-bottom:24px;">{services.leaksIntro}</p>
+      <div class="card-grid">
+        {services.leaks.map((leak) => <TitledCard title={leak.title} body={leak.body} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>{services.arrangement.heading}</h2>
+      <p>{services.arrangement.body}</p>
+      <h2 style="margin-top:40px;">{services.machinery.heading}</h2>
+      {services.machinery.paragraphs.map((p) => <p>{p}</p>)}
+      <div class="btn-group" style="margin-top:20px;">
+        {services.buttons.map((btn) => (
+          <a class="btn btn-secondary" href={btn.href}>{btn.label}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/forms/ContactForm.astro';
+import { contact } from '../data/copy/contact';
+import { site } from '../data/site';
+
+const title = `${contact.headline} — The Plain Office`;
+---
+
+<BaseLayout title={title} description={contact.intro} path="/contact">
+  <section class="section">
+    <div class="wrap">
+      <p class="kicker">{contact.kicker}</p>
+      <h1>{contact.headline}</h1>
+      <p class="lede">{contact.intro}</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-cream);">
+    <div class="wrap card-grid">
+      <div class="card">
+        <h3>{contact.channels.write.heading}</h3>
+        <p style="margin:0;">{site.name}<br />{site.mailingAddressLine1}<br />{site.mailingAddressLine2}</p>
+      </div>
+      <div class="card">
+        <h3>{contact.channels.telephone.heading}</h3>
+        <p style="margin:0;"><a href={site.phoneHref}>{site.phoneDisplay}</a><br /><span class="small-note">{site.businessHoursNote}</span></p>
+      </div>
+      <div class="card">
+        <h3>{contact.channels.fax.heading}</h3>
+        <p style="margin:0;">{site.faxDisplay}</p>
+      </div>
+      <div class="card">
+        <h3>{contact.channels.email.heading}</h3>
+        <p style="margin:0;"><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <ContactForm />
+    </div>
+  </section>
+</BaseLayout>

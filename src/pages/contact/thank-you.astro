@@ -1,0 +1,17 @@
+---
+// This third thank-you page isn't listed in Build Brief v2 §4 (which
+// names only two), but its full copy appears in both the Specification
+// and the Copy Deck, and the Key Findings memo flags the same gap.
+// Built on the assumption it's in scope — see CHANGELOG.md.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { contact } from '../../data/copy/contact';
+---
+
+<BaseLayout title={`${contact.thankYou.heading} — The Plain Office`} description={contact.thankYou.body} path="/contact/thank-you">
+  <section class="section">
+    <div class="wrap prose">
+      <h1>{contact.thankYou.heading}</h1>
+      <p>{contact.thankYou.body}</p>
+    </div>
+  </section>
+</BaseLayout>

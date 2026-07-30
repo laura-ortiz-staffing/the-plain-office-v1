@@ -1,0 +1,77 @@
+/*
+  Design tokens — values taken as-given from the client's validated
+  brand palette (logo colors + companion chart/aging colors from the
+  Website Specification). Do not invent new brand colors; extend
+  outward from these only.
+*/
+:root {
+  /* Brand */
+  --color-navy: #1e3a5f;
+  --color-navy-deep: #16304f;
+  --color-bronze: #a97e42;
+  --color-bronze-bright: #b5813a;
+  --color-olive: #74804f;
+
+  /* Surfaces */
+  --color-cream: #fdfcf9;
+  --color-cream-2: #f7f4ec;
+
+  /* Text */
+  --color-ink: #26251f;
+  --color-ink-secondary: #55534e;
+  --color-ink-muted: #8a867c;
+
+  /* Rules / borders */
+  --color-rule: #dcd5c4;
+  --color-rule-2: #c9bfa6;
+
+  /* Chart-only colors (never used for brand UI) */
+  --color-chart-blue: #3a6ea5;
+  --color-chart-bronze: #b5813a;
+  --color-aging-1: #8fb2d4;
+  --color-aging-2: #6693bd;
+  --color-aging-3: #3a6ea5;
+  --color-aging-4: #1e4a77;
+
+  /* Feedback (form errors) — kept low-saturation to sit quietly beside the brand palette */
+  --color-error: #8a3324;
+  --color-error-bg: #f7ece8;
+
+  /* Type */
+  --font-serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --text-body: 17px;
+  --text-lede: 19px;
+  --text-small: 15px;
+  --text-kicker: 12.5px;
+  --line-height-body: 1.7;
+  --line-height-lede: 1.75;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+
+  /* Layout */
+  --page-max-width: 1020px;
+  --prose-max-width: 46em;
+  --section-padding-y: 56px;
+  --radius: 3px;
+
+  /* Breakpoints (referenced in comments; media queries can't read vars) */
+  /* mobile: <=480px, tablet: <=768px, nav-collapse: <=940px, desktop: >960px */
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px rgba(169, 126, 66, 0.45);
+}
+
+@media (min-width: 720px) {
+  :root {
+    --section-padding-y: 64px;
+  }
+}

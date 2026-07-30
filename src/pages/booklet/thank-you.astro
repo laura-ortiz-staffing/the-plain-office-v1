@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { booklet } from '../../data/copy/booklet';
+import { site } from '../../data/site';
+
+const delivery = Astro.url.searchParams.get('delivery') ?? 'mail_and_pdf';
+const showMailed = delivery === 'mail' || delivery === 'mail_and_pdf';
+const showPdf = delivery === 'pdf' || delivery === 'mail_and_pdf';
+---
+
+<BaseLayout title={`${booklet.thankYou.heading} — The Plain Office`} description={booklet.thankYou.mailedParagraph} path="/booklet/thank-you">
+  <section class="section">
+    <div class="wrap prose">
+      <h1>{booklet.thankYou.heading}</h1>
+      {showMailed && <p>{booklet.thankYou.mailedParagraph}</p>}
+      {showPdf && (
+        <p>
+          {booklet.thankYou.pdfParagraphPrefix}{' '}
+          <a href={site.bookletPdfPath}>{booklet.thankYou.pdfLinkLabel}</a>.
+        </p>
+      )}
+      <p>{booklet.thankYou.whileYouWait} <a href="/samples">See the whole sample report</a>.</p>
+    </div>
+  </section>
+</BaseLayout>

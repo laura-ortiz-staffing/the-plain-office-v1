@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TitledCard from '../components/TitledCard.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import SecondLookForm from '../components/forms/SecondLookForm.astro';
+import { secondLook } from '../data/copy/second-look';
+
+const title = `${secondLook.headline} — The Plain Office`;
+---
+
+<BaseLayout title={title} description={secondLook.intro} path="/second-look">
+  <section class="section">
+    <div class="wrap">
+      <p class="kicker">{secondLook.kicker}</p>
+      <h1>{secondLook.headline}</h1>
+      <p class="lede">{secondLook.intro}</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-cream);">
+    <div class="wrap">
+      <div class="card" style="max-width:44em;">
+        <h2 style="margin-top:0;">{secondLook.terms.heading}</h2>
+        <p style="margin:0; color:var(--color-ink-secondary);">{secondLook.terms.body}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>{secondLook.gettingRecordsToUs.heading}</h2>
+      {secondLook.gettingRecordsToUs.paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-cream);">
+    <div class="wrap">
+      <h2>{secondLook.whatHappensAfter.heading}</h2>
+      <div class="card-grid" style="margin-top:20px;">
+        {secondLook.whatHappensAfter.steps.map((step) => <TitledCard title={step.title} body={step.body} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>{secondLook.cost.heading}</h2>
+      {secondLook.cost.paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-cream);">
+    <div class="wrap">
+      <h2>{secondLook.faqHeading}</h2>
+      <FaqAccordion items={secondLook.faqs} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <SecondLookForm />
+    </div>
+  </section>
+</BaseLayout>

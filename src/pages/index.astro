@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTAButtons from '../components/CTAButtons.astro';
+import TitledCard from '../components/TitledCard.astro';
+import PullQuote from '../components/PullQuote.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { site } from '../data/site';
+import { home } from '../data/copy/home';
+---
+
+<BaseLayout title={site.browserTitle} description={site.metaDescription} path="/">
+  <section class="section hero">
+    <div class="wrap">
+      <p class="kicker">{home.hero.kicker}</p>
+      <h1>{home.hero.headline}</h1>
+      <p class="lede" style="margin-bottom:28px;">{home.hero.paragraph}</p>
+      <CTAButtons />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>{home.deskInCorner.heading}</h2>
+      {home.deskInCorner.paragraphs.map((p) => <p>{p}</p>)}
+      <PullQuote>{home.deskInCorner.pullQuote}</PullQuote>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-cream);">
+    <div class="wrap">
+      <h2>{home.questions.heading}</h2>
+      <p class="section-lede" style="margin-bottom:20px;">{home.questions.intro}</p>
+      <div class="card">
+        <ul style="margin:0; padding-left:1.1em; color:var(--color-ink-secondary);">
+          {home.questions.items.map((item) => <li style="margin-bottom:12px;">{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>{home.whatWeDo.heading}</h2>
+      <div class="card-grid" style="margin-top:24px;">
+        {home.whatWeDo.cards.map((card) => <TitledCard title={card.title} body={card.body} />)}
+      </div>
+      <p class="center-link" style="margin-top:28px;"><a href={home.whatWeDo.link.href}>{home.whatWeDo.link.label}</a></p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-cream);">
+    <div class="wrap">
+      <h2>{home.seeReport.heading}</h2>
+      <p class="section-lede">{home.seeReport.paragraph}</p>
+      <p style="margin-top:24px;"><a class="btn btn-primary" href={home.seeReport.button.href}>{home.seeReport.button.label}</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>{home.threeSteps.heading}</h2>
+      <div class="card-grid" style="margin-top:24px;">
+        {home.threeSteps.steps.map((step) => <TitledCard title={step.title} body={step.body} />)}
+      </div>
+      <p class="center-link" style="margin-top:28px;"><a href={home.threeSteps.link.href}>{home.threeSteps.link.label}</a></p>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="wrap">
+      <div class="card">
+        <p class="kicker">{home.bookletBand.kicker}</p>
+        <h2 style="margin-bottom:14px;">{home.bookletBand.heading}</h2>
+        <p style="color:var(--color-ink-secondary); margin-bottom:20px;">{home.bookletBand.paragraph}</p>
+        <a class="btn btn-primary" href={home.bookletBand.button.href}>{home.bookletBand.button.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>{home.faqTeaser.heading}</h2>
+      <FaqAccordion items={home.faqTeaser.items} openFirst />
+      <p class="center-link" style="margin-top:20px;"><a href={home.faqTeaser.link.href}>{home.faqTeaser.link.label}</a></p>
+    </div>
+  </section>
+</BaseLayout>

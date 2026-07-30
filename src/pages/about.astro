@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { about } from '../data/copy/about';
+
+const title = `${about.headline} — The Plain Office`;
+---
+
+<BaseLayout title={title} description={about.intro} path="/about">
+  <section class="section">
+    <div class="wrap prose">
+      <p class="kicker">{about.kicker}</p>
+      <h1>{about.headline}</h1>
+      <p class="lede">{about.intro}</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--color-cream);">
+    <div class="wrap">
+      <div class="card" style="max-width:44em;">
+        <h2 style="margin-top:0;">{about.privacyPromise.heading}</h2>
+        <p style="margin:0; color:var(--color-ink-secondary);">{about.privacyPromise.body}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap prose">
+      <h2>{about.conventions.heading}</h2>
+      {about.conventions.paragraphs.map((p) => <p>{p}</p>)}
+      <div class="btn-group" style="margin-top:20px;">
+        {about.buttons.map((btn) => (
+          <a class="btn btn-secondary" href={btn.href}>{btn.label}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

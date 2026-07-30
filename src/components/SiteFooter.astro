@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import logoV from '../assets/logo_v_web.png';
+import { site } from '../data/site';
+---
+
+<footer class="site-foot">
+  <div class="wrap">
+    <Image src={logoV} alt={site.name} width={140} widths={[140, 280]} style="margin: 0 auto 20px;" />
+    <p class="foot-contact" style="text-align:center; font-weight:700; color:var(--color-navy); font-family:var(--font-serif);">
+      {site.tagline}
+    </p>
+    <p class="foot-contact">
+      Telephone <a href={site.phoneHref}>{site.phoneDisplay}</a> &middot; Fax {site.faxDisplay}<br />
+      Mail: {site.name}, {site.mailingAddressLine1}, {site.mailingAddressLine2}<br />
+      Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+    <ul class="foot-links">
+      {site.nav.map((item) => (
+        <li><a href={item.href}>{item.label}</a></li>
+      ))}
+    </ul>
+    <p class="foot-verse">{site.verse}</p>
+  </div>
+</footer>

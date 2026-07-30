@@ -1,0 +1,10 @@
+---
+// Renders the six supplied report artifacts exactly as delivered in
+// samples_fragment.html (build-pack assets) — hand-coded inline SVG,
+// its own <style> block. Build Brief v2 §3: "used as-is, do not redraw
+// the charts or invent different numbers." Imported raw and injected
+// verbatim rather than re-authored as Astro markup, on purpose.
+import fragment from '../assets/samples_fragment.html?raw';
+---
+
+<div class="sample-report-gallery" set:html={fragment} />

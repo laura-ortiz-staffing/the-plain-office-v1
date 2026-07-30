@@ -1,0 +1,72 @@
+---
+import { booklet } from '../../data/copy/booklet';
+
+const errorField = Astro.url.searchParams.get('error');
+const errorMessages: Record<string, string> = {
+  name: 'We need your name to send the booklet.',
+  mailing_address: 'We need your mailing address to send the booklet.',
+  rate_limited: 'That is a lot of requests in a short time — please try again in a minute.',
+};
+const errorMessage = errorField ? errorMessages[errorField] : null;
+---
+
+<form class="tpo-form" method="post" action="/api/booklet" novalidate>
+  <h3>{booklet.form.heading}</h3>
+  {errorMessage && <p class="field-error" role="alert">{errorMessage}</p>}
+
+  <div class="honeypot-field" aria-hidden="true">
+    <label for="booklet-website">Leave this field blank</label>
+    <input id="booklet-website" type="text" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="field">
+    <label id="delivery-label">How would you like it?</label>
+    <div class="choice-group" role="radiogroup" aria-labelledby="delivery-label">
+      {booklet.form.deliveryChoices.map((choice, i) => (
+        <div class="choice-option">
+          <input type="radio" id={`delivery-${choice.value}`} name="delivery" value={choice.value} checked={i === 0} />
+          <label for={`delivery-${choice.value}`} style="margin:0; font-weight:400;">{choice.label}</label>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="booklet-name">Name</label>
+    <input id="booklet-name" type="text" name="name" required class={errorField === 'name' ? 'field-missing' : ''} />
+  </div>
+
+  <div class="field">
+    <label for="booklet-business">Business name <span class="hint">Optional</span></label>
+    <input id="booklet-business" type="text" name="business_name" />
+  </div>
+
+  <div class="field">
+    <label for="booklet-trade">Trade or type of work <span class="hint">Optional</span></label>
+    <input id="booklet-trade" type="text" name="trade" placeholder={booklet.form.tradePlaceholder} />
+  </div>
+
+  <div class="field">
+    <label for="booklet-address">Mailing address <span class="hint">Needed if mailed</span></label>
+    <input id="booklet-address" type="text" name="mailing_address" class={errorField === 'mailing_address' ? 'field-missing' : ''} />
+  </div>
+
+  <div class="field">
+    <label for="booklet-town">Town, state, ZIP</label>
+    <input id="booklet-town" type="text" name="town_state_zip" />
+  </div>
+
+  <div class="field">
+    <label for="booklet-phone">Telephone <span class="hint">Optional</span></label>
+    <input id="booklet-phone" type="tel" name="telephone" />
+  </div>
+
+  <div class="field">
+    <label for="booklet-email">Email <span class="hint">Optional</span></label>
+    <input id="booklet-email" type="email" name="email" />
+  </div>
+
+  <button class="btn btn-primary" type="submit">{booklet.form.submitLabel}</button>
+  <p class="small-note" style="margin-top:16px;">{booklet.form.note}</p>
+</form>
+<p class="small-note" style="margin-top:20px; font-style:italic;">{booklet.form.replyCardNote}</p>

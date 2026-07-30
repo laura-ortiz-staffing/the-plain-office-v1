@@ -1,0 +1,20 @@
+# Render Blueprint — see https://render.com/docs/blueprint-spec
+# Deploys the site as a persistent Node web service (not a static site),
+# since the three forms need a real server for their API routes.
+services:
+  - type: web
+    name: the-plain-office-v1
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: node ./dist/server/entry.mjs
+    envVars:
+      - key: NODE_VERSION
+        value: 22.11.0
+      - key: HOST
+        value: 0.0.0.0
+      # PORT is injected by Render itself — do not set it here; the
+      # Node adapter (src, via @astrojs/node) already reads it from env.
+      # Set these in the Render dashboard, not here (secrets):
+      # SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY,
+      # FORM_NOTIFICATION_TO, FORM_NOTIFICATION_FROM

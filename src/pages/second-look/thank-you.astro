@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { secondLook } from '../../data/copy/second-look';
+---
+
+<BaseLayout title={`${secondLook.thankYou.heading} — The Plain Office`} description={secondLook.thankYou.body} path="/second-look/thank-you">
+  <section class="section">
+    <div class="wrap prose">
+      <h1>{secondLook.thankYou.heading}</h1>
+      <p>{secondLook.thankYou.body}</p>
+    </div>
+  </section>
+</BaseLayout>

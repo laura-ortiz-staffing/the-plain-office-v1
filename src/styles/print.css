@@ -1,0 +1,12 @@
+/* Printable pages, per the Build Brief: samples and the booklet excerpt
+   must print cleanly in black and white. Applied site-wide. */
+@media print {
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .site-head, .site-foot, .cta-band, .mobile-nav-toggle,
+  .btn, form, .skip-link { display: none !important; }
+  a { color: #000; text-decoration: underline; }
+  .card, .notice, .pull-quote { border-color: #000 !important; break-inside: avoid; }
+  h1, h2, h3 { color: #000 !important; }
+  .kicker { color: #000 !important; }
+  .wrap { max-width: 100%; padding: 0; }
+}
