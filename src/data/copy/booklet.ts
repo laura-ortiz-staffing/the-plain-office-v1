@@ -47,7 +47,7 @@ export const booklet = {
   },
 
   thankYou: {
-    heading: 'Thank you kindly.',
+    heading: 'Thank You Kindly.',
     mailedParagraph: 'Your booklet will go into the mail within two business days.',
     pdfParagraphPrefix: 'If you asked for the PDF, it is here:',
     pdfLinkLabel: 'Counting the Cost (PDF)',

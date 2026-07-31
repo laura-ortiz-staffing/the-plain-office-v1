@@ -4,6 +4,91 @@ All notable changes to the-plain-office-v1 are recorded here, in the order
 they happened, so a future reader (human or AI) can see not just *what*
 changed but *why*. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased] — 2026-07-31 — Mobile nav drawer, About/What We Do merge, Title Case, form padding
+
+### Mobile navigation rebuilt as a hamburger + side drawer
+
+Client feedback: the mobile navbar looked "giant" (the six links wrapped
+onto extra rows below the logo/phone). Replaced that with a compact
+single row — logo, phone, hamburger — and a slide-out drawer for the
+links, matching the client's explicit request.
+
+Built as a **CSS-only checkbox-hack drawer**, not a JS component: a
+hidden checkbox + label toggles `:checked` state, which slides
+`.site-nav` in from the right and fades in a full-screen overlay (also
+a label targeting the same checkbox, so tapping outside the drawer
+closes it). No `<script>` involved. This matters here specifically
+because the Build Brief requires the whole site to work with
+JavaScript disabled — verified by loading the page in a
+JavaScript-disabled browser context and confirming the drawer still
+opens and closes identically. `src/components/SiteHeader.astro`,
+`src/styles/global.css`.
+
+**Bug caught during verification, not before shipping it:** the first
+version passed a casual look but the hamburger icon was invisible —
+turned out the logo text + phone number + hamburger together (226 +
+98 + 44px + gaps) are wider than a 375px phone screen, so the
+hamburger was laid out 20px past the right edge of the viewport,
+outside the visible area. Caught by measuring actual computed
+`getBoundingClientRect()` values via a Playwright script, not by
+eyeballing a screenshot. Fixed by shrinking the wordmark and phone
+number font size and tightening the header gap below 600px, then
+re-measured to confirm all three elements now sit inside the viewport
+with margin to spare.
+
+### About merged into What We Do; old What We Do placeholder removed
+
+Client clarified: the content built as a separate About page was
+actually meant to be the real "What We Do" page all along. The
+original placeholder What We Do content (Copy Deck's "Who runs your
+office?" — never matched to a Figma screen) is gone; "About" no longer
+exists as a separate nav item or route.
+
+- Deleted `src/pages/about.astro`.
+- `src/data/copy/services.ts` now holds what was `about.ts`'s content
+  (Built to Still Be Here in Twenty Years / Privacy Promise / Plain
+  Conventions / An Honest Fit / The Verdict). `about.ts` deleted.
+- `src/pages/services.astro` rewritten to render this content at
+  `/services`.
+- `site.ts` nav trimmed from 7 to 6 items — "About" removed.
+- Deleted now-fully-unused `TitledCard.astro` and `data/types.ts`
+  (`LeakItem`/`OfficeOption` had no remaining consumers).
+
+### Title Case applied to headings site-wide
+
+Client asked for consistent capitalization ("camel case," meaning
+headline-style Title Case) across all page titles. Several headings
+carried over verbatim from the Figma in sentence case (e.g. "We handle
+the office. You run the business.") while others were already proper
+Title Case (e.g. "How We Get Your Records," with minor words like "of"
+and "for" correctly lowercase). Converted the sentence-case ones to
+match — by hand, in the copy data files, preserving the existing
+correct minor-word lowercasing convention already visible in the
+Figma-sourced headings, rather than a blanket CSS `text-transform`
+(which would have wrongly capitalized "of"/"for"/"the" in headings that
+already had them correctly lowercase). Touched `home.ts`, `samples.ts`,
+`booklet.ts`, `second-look.ts`, `contact.ts` — about a dozen strings.
+
+### Mobile form padding increased
+
+Client feedback: form padding felt too tight on mobile. Below 480px,
+`.form-card` padding was reduced from a flat 36px to 28px/20px (more
+proportionate to a narrow screen) while inter-field spacing and input
+padding both increased, so fields have more breathing room instead of
+feeling squeezed against the card edges.
+
+### Verification
+
+Full rebuild, no errors. Screenshotted and functionally tested the nav
+drawer open/closed/no-JS states via a Playwright script (not just
+visual screenshots — asserted the nav link is actually visible and
+clickable after opening, and that clicking the overlay closes it).
+Confirmed `/about` now 404s and `/services` serves the merged content.
+Re-ran the full form smoke test (booklet PDF-only, second-look valid,
+contact valid) — all still redirect correctly.
+
+---
+
 ## [Unreleased] — 2026-07-31 — Resolved: Booklet email is never required
 
 Client confirmed: email must never be required, full stop. This was

@@ -5,6 +5,12 @@
 // the client: this departs from the Build Brief's instruction to use
 // logo_h_web.png in the header. Following the Figma pending their
 // confirmation. See CHANGELOG.md.
+//
+// Mobile nav (below 1120px): client asked for logo + phone number only
+// visible, with a hamburger opening a side drawer for the nav links —
+// the previous behavior (all six links wrapping onto extra rows) read
+// as "giant." Built as a CSS-only checkbox-hack drawer, on purpose: no
+// JavaScript, so it still works with JS disabled per the Build Brief.
 import { site } from '../data/site';
 
 interface Props {
@@ -16,13 +22,25 @@ const { currentPath } = Astro.props;
 <header class="site-head">
   <div class="head-inner">
     <a class="brand brand-text" href="/" aria-label={`${site.name} — home`}>THE PLAIN OFFICE</a>
-    <nav class="site-nav" aria-label="Primary">
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-label="Show navigation menu" />
+
+    <nav class="site-nav" aria-label="Primary" id="primary-nav">
       {site.nav.map((item) => (
         <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
           {item.label}
         </a>
       ))}
     </nav>
+
     <a class="head-phone" href={site.phoneHref}>{site.phoneDisplay}</a>
+
+    <label for="nav-toggle" class="nav-toggle-btn">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </label>
+
+    <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
   </div>
 </header>

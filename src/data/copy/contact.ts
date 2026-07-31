@@ -6,7 +6,7 @@
 // fax/mail/email values themselves still live in src/data/site.ts.
 
 export const contact = {
-  headline: 'Reach us by the road you prefer.',
+  headline: 'Reach Us by the Road You Prefer.',
   intro:
     'We maintain traditional avenues of correspondence alongside modern methods, ensuring our accessibility matches your preferred mode of professional communication.',
 
@@ -35,7 +35,7 @@ export const contact = {
   },
 
   thankYou: {
-    heading: 'Thank you kindly.',
+    heading: 'Thank You Kindly.',
     body: 'We will answer within two business days, by whichever way you gave us.',
     returnLinkLabel: 'Return to Home',
   },

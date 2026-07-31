@@ -29,13 +29,16 @@ export const site = {
   // The Figma nav headers show six items with no "Home" link at all.
   // Kept "Home" anyway — that was the client's own explicit usability
   // instruction (2026-07-30), independent of what any screen shows.
+  //
+  // "About" removed 2026-07-31: the client clarified the content built
+  // at /about was actually meant to live under "What We Do" — the two
+  // pages are now one (see src/pages/services.astro).
   nav: [
     { label: 'Home', href: '/' },
     { label: 'What We Do', href: '/services' },
     { label: 'Sample Reports', href: '/samples' },
     { label: 'The Booklet', href: '/booklet' },
     { label: 'The Second Look', href: '/second-look' },
-    { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ],
 

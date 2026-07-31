@@ -9,7 +9,7 @@
 
 export const samples = {
   kicker: 'Sample Reports',
-  headline: 'Reliable numbers, better decisions.',
+  headline: 'Reliable Numbers, Better Decisions.',
   verse: '"A false balance is an abomination to the Lord, but a just weight is his delight." — Proverbs 11:1',
 
   overview: {

@@ -42,7 +42,7 @@ export const secondLook = {
   },
 
   thankYou: {
-    heading: 'Thank you kindly.',
+    heading: 'Thank You Kindly.',
     body: 'Within a few days you will receive a short list of what to gather — and a prepaid UPS shipping label, if you would like one. Within a few weeks of your records arriving, you will hold a report built from your own figures and the written list of what we found. After that, the deciding is yours — no calls chasing you, no pressure.',
     returnLinkLabel: 'Return to Services',
     returnLinkHref: '/services',

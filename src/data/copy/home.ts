@@ -11,13 +11,13 @@
 export const home = {
   hero: {
     kicker: 'Bookkeeping & Business Support for Plain Communities',
-    headline: 'We handle the office. You run the business.',
+    headline: 'We Handle the Office. You Run the Business.',
     paragraph:
       "You didn't start a business to sit at a desk. You started it to build, to serve, and to provide. We take the paperwork off your shoulders so you can get back to the shop floor or the job site.",
   },
 
   deskInCorner: {
-    heading: 'The desk in the corner',
+    heading: 'The Desk in the Corner',
     paragraph:
       "Every night, it's the same. You finish a long day of hard work, only to face a stack of receipts, invoices, and bank statements. The numbers are there, but they aren't telling you what you need to know. Are you actually making a profit? Can you afford that new piece of equipment?",
     missionCard: {
@@ -35,14 +35,14 @@ export const home = {
       'Is my overhead too high?',
       'Where is my cash actually going?',
     ],
-    heading: 'The questions your books should answer',
+    heading: 'The Questions Your Books Should Answer',
   },
 
   practicalSupport: {
     heading: 'Practical Support',
     cards: [
-      { icon: 'book', title: 'Keep your books', body: 'Full-service data entry and ledger management. We ensure every penny is accounted for with meticulous detail.' },
-      { icon: 'mail', title: 'Mail you a report', body: 'Simple, printed monthly summaries delivered to your door. No login required—just clear numbers on paper.' },
+      { icon: 'book', title: 'Keep Your Books', body: 'Full-service data entry and ledger management. We ensure every penny is accounted for with meticulous detail.' },
+      { icon: 'mail', title: 'Mail You a Report', body: 'Simple, printed monthly summaries delivered to your door. No login required—just clear numbers on paper.' },
       { icon: 'coins', title: 'Manage Accounts', body: 'We track what you owe and what is owed to you. We handle the follow-ups so you can maintain relationships.' },
       { icon: 'bank', title: 'Bank Reconciliations', body: 'Syncing your bank statements with your ledger to catch errors and prevent fraud before they become problems.' },
       { icon: 'document', title: 'Sales Tax Filing', body: 'Worry-free compliance. We calculate and file your sales tax returns accurately and always on schedule.' },
@@ -52,7 +52,7 @@ export const home = {
 
   seeReport: {
     eyebrow: 'Transparent, easy-to-read bookkeeping. No complicated software, just your numbers.',
-    heading: 'See the report before you ask for it',
+    heading: 'See the Report Before You Ask for It',
     card: {
       title: 'Monthly Operations Summary',
       brand: 'The Plain Office',
@@ -74,7 +74,7 @@ export const home = {
       { number: '2', title: 'Setting Up', body: 'We organize your accounts, clean up the backlog, and establish a system that works for your workflow.' },
       { number: '3', title: 'The Rhythm', body: 'You mail us receipts and bank statements; we mail you reports. A monthly cadence of clarity.' },
     ],
-    heading: 'Three steps, start to finish',
+    heading: 'Three Steps, Start to Finish',
   },
 
   freeResource: {
@@ -96,11 +96,11 @@ export const home = {
       { question: 'Is my information private?', answer: 'Absolutely. We understand the value of confidentiality in our community. Your numbers never leave our office except to come back to you.' },
       { question: 'What if my books are a mess?', answer: 'That is why we are here. Most of our clients come to us with "the box of receipts." We specialize in sorting it out and bringing order to the chaos.' },
     ],
-    heading: 'Plain answers',
+    heading: 'Plain Answers',
   },
 
   finalCta: {
-    heading: 'Find out what your books have been keeping from you',
+    heading: 'Find Out What Your Books Have Been Keeping From You',
     note: 'No obligation. Just the truth about your numbers.',
   },
 } as const;

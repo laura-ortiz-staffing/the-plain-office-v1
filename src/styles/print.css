@@ -2,7 +2,7 @@
    must print cleanly in black and white. Applied site-wide. */
 @media print {
   body { background: #fff; color: #000; font-size: 12pt; }
-  .site-head, .site-foot, .cta-band, .mobile-nav-toggle,
+  .site-head, .site-foot, .cta-band,
   .btn, form, .skip-link { display: none !important; }
   a { color: #000; text-decoration: underline; }
   .card, .notice, .pull-quote { border-color: #000 !important; break-inside: avoid; }
