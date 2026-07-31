@@ -42,14 +42,8 @@ const errorMessage = errorField ? errorMessages[errorField] : null;
   </div>
 
   <div class="field">
-    <!--
-      Shown as required per the approved design, but NOT actually
-      enforced (no `required` attribute) — the Build Brief is explicit
-      that no action on the site may require an email address, and
-      many of this audience have none. Flagged to the client; see
-      CHANGELOG.md.
-    -->
-    <label for="booklet-email">Email Address *</label>
+    <!-- Client confirmed 2026-07-31: email must never be required. -->
+    <label for="booklet-email">Email Address <span class="hint">Optional</span></label>
     <input id="booklet-email" type="email" name="email" />
   </div>
 

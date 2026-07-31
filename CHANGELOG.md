@@ -4,6 +4,17 @@ All notable changes to the-plain-office-v1 are recorded here, in the order
 they happened, so a future reader (human or AI) can see not just *what*
 changed but *why*. Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased] — 2026-07-31 — Resolved: Booklet email is never required
+
+Client confirmed: email must never be required, full stop. This was
+already true server-side (`src/pages/api/booklet.ts` never enforced
+it), but the Booklet form still visually labeled it "Email Address *"
+per the Figma design. Removed the asterisk and marked it "Optional"
+like every other non-required field, so the form no longer implies a
+requirement that doesn't exist. `src/components/forms/BookletForm.astro`.
+
+---
+
 ## [Unreleased] — 2026-07-30 — Full responsive audit
 
 Audited every page at 360px (the Build Brief's own minimum) and 768px
